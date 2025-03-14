@@ -1,0 +1,12 @@
+#!/bin/bash
+#SBATCH -J unipartite         # Job name
+#SBATCH -o job.%j.out     # Name of stdout output file (%j expands to jobId)
+#SBATCH -t 15:00:00       # Run time (hh:mm:ss) - run for one hour max
+#SBATCH --mem=32G                 # 32 GB of memory
+#SBATCH -p standard      # Run on scavenge queue (all nodes)
+#SBATCH --nodes=2                # Request 2 nodes
+#SBATCH --exclusive              # Get exclusive nodes
+#SBATCH --partition=cores        # Run on cores queue
+#SBATCH --mail-type=FAIL,END 
+
+python hashtag_script.py

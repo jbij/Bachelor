@@ -9,4 +9,4 @@
 #SBATCH --partition=cores        # Run on cores queue
 #SBATCH --mail-type=FAIL,END 
 
-python hashtag_script.py
+python hashtag_script_2.py

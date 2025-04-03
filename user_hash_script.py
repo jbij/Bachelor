@@ -66,7 +66,6 @@ for index, row in videos.iterrows():
 
 # %%
 usernames_unique = pd.unique(follows[['source', 'target']].values.ravel()).tolist()
-usernames_unique
 
 # %% [markdown]
 # Get dictionary of hahtags per user
@@ -129,7 +128,7 @@ filtered_user_hashtag_text = {
 
 # %%
 # Step 2: Compute TF-IDF
-vectorizer = TfidfVectorizer(max_features=100000)
+vectorizer = TfidfVectorizer()
 tfidf_matrix = vectorizer.fit_transform(filtered_user_hashtag_text.values())
 
 # %%
@@ -145,7 +144,7 @@ for i, user in enumerate(filtered_user_hashtag_text.keys()):
     
     # Rank hashtags by score
     top_indices = tfidf_scores.argsort()[::-1]  # Sort in descending order
-    top_hashtags = [feature_names[idx] for idx in top_indices[:]]  # Get top 5 hashtags
+    top_hashtags = [feature_names[idx] for idx in top_indices[:10]]  # Get top 5 hashtags
     
     # Store in dictionary
     user_tfidf_scores[user] = top_hashtags

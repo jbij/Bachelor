@@ -1,0 +1,12 @@
+#!/bin/bash
+#SBATCH -J stitch         # Job name
+#SBATCH -o job.%j.out     # Name of stdout output file (%j expands to jobId)
+#SBATCH -t 10:00:00       # Run time (hh:mm:ss) - run for one hour max
+#SBATCH --mem=128G                 # 32 GB of memory
+#SBATCH -p standard      # Run on scavenge queue (all nodes)
+#SBATCH --nodes=1                # Request 2 nodes
+#SBATCH --exclusive              # Get exclusive nodes
+#SBATCH --partition=scavenge       # Run on cores queue
+#SBATCH --mail-type=FAIL,END 
+
+python stitch_network.py

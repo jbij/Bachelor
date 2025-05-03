@@ -43,27 +43,31 @@ similarity_matrix = cosine_similarity(embeddings)
 #have to plot a histogram to see the curt-off
 import matplotlib.pyplot as plt
 
-# similarities is your 480 x 480 cosine similarity matrix (flattened)
+# similarities is 480 x 480 cosine similarity matrix (flattened)
 plt.hist(similarities.flatten(), bins=100)
 plt.title('Distribution of Cosine Similarities')
+
+# Save the plot as a PNG image
+plt.savefig('cosine_similarity_histogram.png', dpi=300, bbox_inches='tight')
+
+# Display the plot
 plt.show()
+# # %%
+# # Graph
+# G = nx.Graph()
+# for i in range(len(hashtags)):
+#     G.add_node(hashtags[i])
+#     for j in range(i+1, len(hashtags)):
+#         if similarity_matrix[i, j] > 0.2:  # Threshold to create an edge - look at histogram
+#             G.add_edge(hashtags[i], hashtags[j], weight=similarity_matrix[i, j])
 
-# %%
-# Graph
-G = nx.Graph()
-for i in range(len(hashtags)):
-    G.add_node(hashtags[i])
-    for j in range(i+1, len(hashtags)):
-        if similarity_matrix[i, j] > 0.2:  # Threshold to create an edge - look at histogram
-            G.add_edge(hashtags[i], hashtags[j], weight=similarity_matrix[i, j])
+# # %%
+# # Cluster with Louvain
+# partition = community_louvain.best_partition(G, weight='weight')
 
-# %%
-# Cluster with Louvain
-partition = community_louvain.best_partition(G, weight='weight')
-
-# %%
-# Save graph to a pickle file
-with open('S_R_cooc.pkl', 'wb') as f:
-    pickle.dump(G, f)
+# # %%
+# # Save graph to a pickle file
+# with open('S_R_cooc.pkl', 'wb') as f:
+#     pickle.dump(G, f)
 
 

@@ -152,7 +152,6 @@ def choose_threshold_by_gcc_size(filepath, thresholds, is_directed=False, hashta
 
         l2, = ax2.plot(edge_counts[:, 0], edge_counts[:, 1], marker='s', linestyle='--', color="red", label="Edge Count")
 
-        # Combine legends from both axes
         lines = [l1, l2]
         labels = [line.get_label() for line in lines]
         ax1.legend(lines, labels, loc="upper right", fontsize=12)
@@ -204,7 +203,6 @@ def choose_threshold_by_gcc_size(
         if original_size is None:
             original_size = backbone.number_of_nodes()
 
-    # Convert to numpy arrays
     gcc_sizes = np.array(gcc_sizes)
     edge_counts = np.array(edge_counts)
     num_components_arr = np.array(num_components_list)
@@ -212,7 +210,6 @@ def choose_threshold_by_gcc_size(
     if plot:
         fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6))
 
-        # Plot 1: GCC Size and Edge Count vs Threshold
         ax1.set_xlabel("Threshold", fontsize=14)
         ax1.set_ylabel("GCC Size", color="blue", fontsize=14)
         ax1.tick_params(axis='y', labelcolor="blue", labelsize=12)
@@ -226,7 +223,6 @@ def choose_threshold_by_gcc_size(
 
         ax1.set_title("GCC Size & Edge Count vs Threshold", fontsize=16)
 
-        # Plot 2: Number of Components vs Threshold
         ax2.set_xlabel("Threshold", fontsize=14)
         ax2.set_ylabel("Number of Components", color="green", fontsize=14)
         ax2.tick_params(axis='y', labelcolor="green", labelsize=12)
@@ -243,10 +239,6 @@ def choose_threshold_by_gcc_size(
         plt.close()
 
     return max(gcc_sizes, key=lambda x: x[1])
-
-
-# %% [markdown]
-# # Hashtag coocurence
 
 # %%
 follow_path = '../../shared-folder-gald/data/follow_graph.pkl'

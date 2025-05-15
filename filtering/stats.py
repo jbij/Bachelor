@@ -1,14 +1,6 @@
-# %% [markdown]
-# ## Get network stats
 
-# %%
-import pickle
-import pandas as pd
 import networkx as nx
-import pickle
 import numpy as np
-import powerlaw
-import matplotlib.pyplot as plt
 
 # %%
 def graph_stats(G):
@@ -25,28 +17,23 @@ def graph_stats(G):
     
     stats['degree_assortativity'] = nx.degree_assortativity_coefficient(G)
     
-    # Giant Connected Component (GCC)
     if nx.is_directed(G) == False:
         largest_cc = max(nx.connected_components(G), key=len)
         GCC = G.subgraph(largest_cc)
         stats['GCC_size'] = len(GCC)
     
-    # Power-law fitting
     try:
         fit = powerlaw.Fit(degrees)
-        stats['power_law_alpha'] = fit.alpha  # Power-law exponent
-        stats['power_law_xmin'] = fit.xmin  # Minimum value where power law applies
-        stats['ks_test_statistic'] = fit.D  # KS test statistic (lower is better)
+        stats['power_law_alpha'] = fit.alpha  
+        stats['power_law_xmin'] = fit.xmin  
+        stats['ks_test_statistic'] = fit.D  
         
-        # Compare power law with other distributions
         distribution_list = ['lognormal', 'exponential', 'truncated_power_law']
         comparison_results = {}
         
         for dist in distribution_list:
             R, p = fit.distribution_compare('power_law', dist)
             comparison_results[dist] = (R, p)
-        
-        # Find the best alternative distribution (lowest R and p-value)
         best_fit = min(comparison_results.items(), key=lambda x: (x[1][0], x[1][1]))
         best_dist, (best_R, best_p) = best_fit
         

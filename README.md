@@ -1,4 +1,4 @@
-This repository contains the code and final report of our bachelor thesis at the IT University of Copenhagen. The thesis was supervised by Luka Aiello.
+This repository contains the code and final report of our bachelor thesis at the IT University of Copenhagen. The thesis was supervised by Luca Aiello.
 
 
 This repository contains the source code and documentation for our bachelor’s thesis project, "Enabling user-driven exploration: Structural and Semantic Analysis of
